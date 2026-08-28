@@ -1,0 +1,9 @@
+workspace:
+  id: d1f613e6-c75e-496b-8c13-7d0eca993113
+localResources:
+  specs:
+    - ../api course project/obj/Debug/net10.0/EndpointInfo/api course project.json
+    - ../api course project/obj/Debug/net10.0/EndpointInfo/Store.APIs.json
+cloudResources:
+  globals:
+    ../postman/globals/workspace.globals.yaml: 113b1aff-56e4-4667-81ea-577c5953d5ae

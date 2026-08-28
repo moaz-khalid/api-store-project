@@ -1,0 +1,6 @@
+$kind: collection
+name: Store API
+description: 'API collection for the Store application. Covers Products (listing, filtering by brand/type, and fetching by ID) and WeatherForecast endpoints.'
+variables:
+  - key: baseUrl
+    value: 'http://localhost:5270'

@@ -1,0 +1,6 @@
+$kind: http-request
+name: Get All Types
+method: GET
+url: '{{baseUrl}}/api/products/types'
+description: 'Returns a list of all product types.'
+order: 4000

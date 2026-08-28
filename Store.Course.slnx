@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="api course project/Store.APIs.csproj" />
+  <Project Path="Store.Core/Store.Core.csproj" Id="d5b1e3e0-4b46-43d6-a7c2-97d47b6ff600" />
+  <Project Path="Store.Repository/Store.Repository.csproj" Id="6b837fde-b023-4500-bb11-ace8d08755e5" />
+  <Project Path="Store.Service/Store.Service.csproj" Id="d994950a-0093-4914-b79d-196b74e7393d" />
+</Solution>
