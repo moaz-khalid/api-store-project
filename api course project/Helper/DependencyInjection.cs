@@ -2,11 +2,15 @@
 using Azure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 using Store.Core;
+using Store.Core.Mapping.Baskets;
 using Store.Core.Mapping.Products;
+using Store.Core.Repositories.Contract;
 using Store.Core.Services.Contract;
 using Store.Repository;
 using Store.Repository.Data.Contexts;
+using Store.Repository.Repositories;
 using Store.Service.Services.Products;
 
 namespace api_course_project.Helper
@@ -22,10 +26,10 @@ namespace api_course_project.Helper
             services.AddUserDefinedService();
             services.AddAutoMapperService(configuration);
             services.ConfigureInvalidModelStateResponseService();
+            services.AddRedisService(configuration);
 
             return services;
         }
-
 
 
         private static IServiceCollection AddBuiltInService(this IServiceCollection services)
@@ -43,7 +47,6 @@ namespace api_course_project.Helper
             return services;
         }
 
-
         private static IServiceCollection AddDbContextService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<StoreDbContext>(options =>
@@ -51,22 +54,21 @@ namespace api_course_project.Helper
             return services;
         }
 
-
         private static IServiceCollection AddUserDefinedService(this IServiceCollection services)
         {
 
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IBasketRepository,BasketRepository>();
             return services;
         }
 
         private static IServiceCollection AddAutoMapperService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAutoMapper(m => m.AddProfile(new ProductProfile(configuration)));
+            services.AddAutoMapper(m => m.AddProfile(new BasketProfile()));
             return services;
         }
-
-
 
         private static IServiceCollection ConfigureInvalidModelStateResponseService(this IServiceCollection services)
         {
@@ -89,6 +91,21 @@ namespace api_course_project.Helper
             });
             return services;
         }
+
+        private static IServiceCollection AddRedisService(this IServiceCollection services, IConfiguration configuration)
+        {
+
+            services.AddSingleton<IConnectionMultiplexer>((ServiceProvider) =>
+            {
+                var connection = configuration.GetConnectionString("Redis");
+                return ConnectionMultiplexer.Connect(connection);
+            });
+
+
+            return services;
+        }
+
+
 
 
 

@@ -4,7 +4,12 @@ using System.Text;
 
 namespace Store.Core.Entities
 {
-    internal class CustomerBasket
+    public class CustomerBasket
     {
+        public String Id { get; set; }
+
+        public List<BasketItem> Items { get; set; }
+
+
     }
 }
