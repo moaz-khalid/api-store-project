@@ -1,4 +1,5 @@
-﻿using api_course_project.Errors;
+﻿using api_course_project.Attributes;
+using api_course_project.Errors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Store.Core.Dtos.Products;
@@ -24,6 +25,7 @@ namespace api_course_project.Controllers
 
         [ProducesResponseType(typeof(PaginationResponse<ProductDto>), StatusCodes.Status200OK)]
         [HttpGet]
+        [Cached(100)]
         public async Task<ActionResult<PaginationResponse<ProductDto>>> GetAllProducts([FromQuery] ProductSpecParams productSpec)
         {
             var resault = await _ProductService.GetAllProductsAsync(productSpec);

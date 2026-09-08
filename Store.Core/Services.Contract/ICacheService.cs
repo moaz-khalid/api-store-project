@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Store.Core.Services.Contract
+{
+    public interface ICacheService
+    {
+
+        Task SetCacheKeyAsync(string key, object response, TimeSpan expireTime );
+
+        Task<string> GetCacheKeyAsync(string key);
+
+
+    }
+}

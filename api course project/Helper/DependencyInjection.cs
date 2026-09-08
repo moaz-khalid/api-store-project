@@ -12,6 +12,7 @@ using Store.Repository;
 using Store.Repository.Data.Contexts;
 using Store.Repository.Repositories;
 using Store.Service.Services.Products;
+using Store.Service.Services.Caches;
 
 namespace api_course_project.Helper
 {
@@ -59,6 +60,7 @@ namespace api_course_project.Helper
 
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICacheService, CacheService>();
             services.AddScoped<IBasketRepository,BasketRepository>();
             return services;
         }
