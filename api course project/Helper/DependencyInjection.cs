@@ -13,6 +13,9 @@ using Store.Repository.Data.Contexts;
 using Store.Repository.Repositories;
 using Store.Service.Services.Products;
 using Store.Service.Services.Caches;
+using Store.Repository.identity.Contexts;
+using Store.Core.Entities.identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace api_course_project.Helper
 {
@@ -28,6 +31,7 @@ namespace api_course_project.Helper
             services.AddAutoMapperService(configuration);
             services.ConfigureInvalidModelStateResponseService();
             services.AddRedisService(configuration);
+            services.AddIdentityService();
 
             return services;
         }
@@ -51,7 +55,20 @@ namespace api_course_project.Helper
         private static IServiceCollection AddDbContextService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<StoreDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            {
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddDbContext<StoreIdentityDbContext>(options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
+            });
+
+
+
+
+
+
             return services;
         }
 
@@ -103,6 +120,14 @@ namespace api_course_project.Helper
                 return ConnectionMultiplexer.Connect(connection);
             });
 
+
+            return services;
+        }
+
+        private static IServiceCollection AddIdentityService(this IServiceCollection services)
+        {
+            services.AddIdentity<AppUser, IdentityRole>()
+            .AddEntityFrameworkStores<StoreIdentityDbContext>();
 
             return services;
         }
