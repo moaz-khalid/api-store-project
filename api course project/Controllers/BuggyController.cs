@@ -56,6 +56,7 @@ namespace api_course_project.Controllers
             return Ok();   //validation error
         }
 
+
         [HttpGet("unauthorized")]
         public async Task<IActionResult> GetUnauthorizedError()
         {

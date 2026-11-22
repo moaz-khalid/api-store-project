@@ -11,7 +11,7 @@ using Store.Core.Specifications.Products;
 namespace api_course_project.Controllers
 {
 
-    public class ProductsController : BaseApiController
+    public class ProductsController : BaseApiController 
     {
         private readonly IProductService _ProductService;
 

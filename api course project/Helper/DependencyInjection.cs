@@ -16,6 +16,8 @@ using Store.Service.Services.Caches;
 using Store.Repository.identity.Contexts;
 using Store.Core.Entities.identity;
 using Microsoft.AspNetCore.Identity;
+using Store.Service.Services.Tokens;
+using Store.Service.Services.Users;
 
 namespace api_course_project.Helper
 {
@@ -79,6 +81,8 @@ namespace api_course_project.Helper
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICacheService, CacheService>();
             services.AddScoped<IBasketRepository,BasketRepository>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserService, UserService>();
             return services;
         }
 
